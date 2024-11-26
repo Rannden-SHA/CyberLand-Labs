@@ -111,7 +111,7 @@ menu_jugador() {
         echo -e "${GREEN}1) Importar máquina/s CTF desde archivo local${RESET}"
         echo -e "${YELLOW}2) Eliminar imagen Docker existente${RESET}"
         echo -e "${RED}3) ⚠️  Limpieza completa de Docker${RESET}"
-        echo -e "4) Regresar al menú principal"
+        echo -e ") Regresar al menú principal"
         echo -e "5) Salir del script"
         echo
         read -p "Seleccione una opción: " opcion
@@ -124,7 +124,7 @@ menu_jugador() {
             1) importar_maquina ;;
             2) eliminar_imagen ;;
             3) limpiar_docker ;;
-            4) break ;;
+            ) break ;;
             5) salir_script ;;
         esac
     done
@@ -164,7 +164,7 @@ menu_creador() {
         echo -e "${GREEN}1) Crear nueva máquina${RESET}"
         echo -e "${GREEN}2) Importar máquina/s desde archivo local${RESET}"
         echo -e "${CYAN}3) Iniciar una imagen Docker${RESET}"
-        echo -e "${CYAN}4) Eliminar una imagen Docker${RESET}"
+        echo -e "${CYAN}) Eliminar una imagen Docker${RESET}"
         echo -e "${BLUE}5) Detener un contenedor Docker${RESET}"
         echo -e "${BLUE}6) Eliminar contenedor Docker${RESET}"
         echo -e "${BLUE}7) Conectar a un contenedor para modificarlo${RESET}"
@@ -180,7 +180,7 @@ menu_creador() {
             1) crear_maquina ;;
             2) importar_maquina ;;
             3) iniciar_maquina_exportada ;;
-            4) eliminar_imagen ;;
+            ) eliminar_imagen ;;
             5) detener_contenedor ;;
             6) eliminar_contenedor ;;
             7) conectar_contenedor ;;
@@ -329,7 +329,7 @@ eliminar_imagen() {
         echo -e "${LIGHT_GREEN}    🗑️ Eliminar Imagen Docker 🗑️${RESET}"
         echo -e "${GREEN}==========================================${RESET}"
         docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.ID}}"
-        read -p "Ingrese el nombre de la imagen que desea eliminar (nombre:tag, ej: ubuntu:20.04): " nombre_imagen
+        read -p "Ingrese el nombre de la imagen que desea eliminar (nombre:tag, ej: ubuntu:20.0): " nombre_imagen
         if [ -z "$nombre_imagen" ]; then
             echo "❌ No ha ingresado un nombre de imagen. Regresando al menú..."
             read -p "Presione Enter para regresar al menú..."
@@ -394,7 +394,7 @@ exportar_imagen() {
 #################### FUNCIONES PARA LAS MÁQUINAS ######################
 
 crear_maquina() {
-    local HIDDEN_MARKER="TcOhcXVpbmEgZ2VuZXJhZGEgY29uIGN5YmVybGFuZC5zaCBzY3JpcHQgZGVzYXJyb2xsYWRvIHBvciA0azRtMW0zLiDCgUdyYWNpYXMgcG9yIGVsZWdpciBDeWJlckxhbmQgTGFicyEgVmlzaXRhOiBodHRwczovL2N5YmVybGFuZHNlYy5jb20="
+    local HIDDEN_MARKER="TcOhcXVpbmEgZ2VuZXJhZGEgY29uIGN5YmVybGFuZC5zaCBzY3JpcHQgZGVzYXJyb2xsYWRvIHBvciBBZHJpw6FuIEdpc2JlcnQuIEdyYWNpYXMgcG9yIGVsZWdpciBDeWJlckxhbmQgTGFicyEgVmlzaXRhOiBodHRwczovL2N5YmVybGFuZHNlYy5jb20vY3liZXJsYW5kLWxhYnM="
 
     clear
     echo -e "${GREEN}==========================================${RESET}"
