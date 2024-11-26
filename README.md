@@ -67,6 +67,7 @@ Diseñado para quienes desean resolver desafíos en máquinas preconfiguradas.
 - **Iniciar Máquinas**: Ejecuta automáticamente las máquinas importadas.
 - **Listar y Administrar Máquinas**: Visualiza y administra las imágenes y contenedores disponibles.
 - **Limpieza Completa**: Elimina todas las imágenes y contenedores de Docker.
+
 ![sh2](https://github.com/user-attachments/assets/abbc6e36-bc10-44d4-bca6-657b774e77f4)
 
 
@@ -82,6 +83,7 @@ Diseñado para quienes desean resolver desafíos en máquinas preconfiguradas.
 
 ### **Perfil Creador**
 El menú del creador está diseñado para quienes desean crear o personalizar máquinas CTF.
+
 ![sh5](https://github.com/user-attachments/assets/c92b21ab-46af-46e6-b958-60db9636c0fb)
 
 
@@ -96,6 +98,7 @@ El menú del creador está diseñado para quienes desean crear o personalizar m�
 4. Opcionalmente, el script te preguntará si deseas:
    - Iniciar un contenedor para configuraciones adicionales.
    - Exportar la máquina en formato `.tar`.
+
 ![sh6](https://github.com/user-attachments/assets/7a96d69a-1c8b-4640-a123-a96baa2aaa9f)
 
 
@@ -118,6 +121,7 @@ Este submenú permite gestionar imágenes y contenedores de Docker.
 - **Conectar**: Conéctate a un contenedor en ejecución.
 - **Eliminar**: Elimina imágenes o contenedores.
 - **Limpieza Completa**: Borra todas las imágenes y contenedores.
+
 ![sh7](https://github.com/user-attachments/assets/841f1cbd-a491-4e22-ba66-62dc30d4b6b8)
 
 
