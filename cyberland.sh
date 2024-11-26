@@ -36,7 +36,7 @@ menu_principal() {
         echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
         echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
         echo
-        echo -e "${YELLOW}               Welcome to CyberLand Labs - Hack the Future!${RESET}"
+        echo -e "${YELLOW}         Ver. 2.1 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
         echo -e "${GREEN}===============================================================================${RESET}"                                                                                        
         echo
         echo -e "${CYAN}Este script te permite administrar, crear, exportar y eliminar imágenes y contenedores Docker.${RESET}"
@@ -49,7 +49,7 @@ menu_principal() {
         echo -e "${GREEN}4)${RESET} Créditos"
         echo -e "${GREEN}5)${RESET} Salir del script"
         echo
-        echo -e "🌐 Web principal: ${LIGHT_GREEN}https://cyberlandsec.com${RESET}"
+        echo -e "🌐 CyberLand Web ${LIGHT_GREEN}https://cyberlandsec.com/cyberland-labs${RESET}"
         echo
         echo -e "${GREEN}==========================================${RESET}"
         echo
@@ -214,7 +214,7 @@ mostrar_creditos() {
     echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
     echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
     echo
-    echo -e "${LIGHT_CYAN}               Welcome to CyberLand Labs - Hack the Future!${RESET}"
+    echo -e "${LIGHT_CYAN}       Ver. 2.1 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
     echo -e "${GREEN}===============================================================================${RESET}"    
     echo
 
