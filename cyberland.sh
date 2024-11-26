@@ -15,6 +15,8 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+comprobar_requisitos
+
 #######################################################################
 ##################### FUNCIONES PARA LOS MENÚS ########################
 
@@ -36,7 +38,7 @@ menu_principal() {
         echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
         echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
         echo
-        echo -e "${YELLOW}         Ver. 2.1 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
+        echo -e "${YELLOW}         Ver. 2.2 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
         echo -e "${GREEN}===============================================================================${RESET}"                                                                                        
         echo
         echo -e "${CYAN}Este script te permite administrar, crear, exportar y eliminar imágenes y contenedores Docker.${RESET}"
@@ -45,9 +47,8 @@ menu_principal() {
         echo -e "${MAGENTA}🔹 Existen cinco opciones disponibles: ${RESET}"
         echo -e "${LIGHT_RED}1) Perfil Jugador    - Descargar, ejecutar y resolver desafíos en las máquinas CTF ya configuradas.${RESET}"
         echo -e "${YELLOW}2) Perfil Creador    - Crear, configurar y exportar nuevas máquinas CTF.${RESET}"
-        echo -e "${GREEN}3)${RESET} Comprobar Requisitos"
-        echo -e "${GREEN}4)${RESET} Créditos"
-        echo -e "${GREEN}5)${RESET} Salir del script"
+        echo -e "${GREEN}3)${RESET} Créditos"
+        echo -e "${GREEN}4)${RESET} Salir del script"
         echo
         echo -e "🌐 CyberLand Web ${LIGHT_GREEN}https://cyberlandsec.com/cyberland-labs${RESET}"
         echo
@@ -63,16 +64,13 @@ menu_principal() {
                 iniciar_perfil_creador
                 ;;
             3)
-                comprobar_requisitos
-                ;;
-            4)
                 mostrar_creditos
                 ;;
-            5)
+            4)
                 salir_script
                 ;;
             *)
-                echo -e "${LIGHT_RED}❌ Opción inválida. Por favor, ingrese un número entre 1 y 5.${RESET}"
+                echo -e "${LIGHT_RED}❌ Opción inválida. Por favor, ingrese un número entre 1 y 4.${RESET}"
                 sleep 2
                 ;;
         esac
@@ -214,7 +212,7 @@ mostrar_creditos() {
     echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
     echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
     echo
-    echo -e "${LIGHT_CYAN}       Ver. 2.1 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
+    echo -e "${LIGHT_CYAN}       Ver. 2.2 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
     echo -e "${GREEN}===============================================================================${RESET}"    
     echo
 
@@ -866,22 +864,34 @@ limpiar_docker() {
 }
 
 comprobar_requisitos() {
-    clear
-    echo -e "${GREEN}==========================================${RESET}"
-    echo -e "${LIGHT_RED}     🔍 Comprobar Requisitos 🔍${RESET}"
-    echo -e "${GREEN}==========================================${RESET}"
-    echo
-    if ! command -v docker &> /dev/null
-    then
+    if ! command -v docker &> /dev/null; then
         echo -e "${RED}❌ Docker no está instalado.${RESET}"
-        echo -e "Por favor, instala Docker y vuelve a intentarlo."
-        echo -e "${YELLOW}Puedes descargarlo desde: https://docs.docker.com/get-docker/${RESET}"
-    else
-        echo -e "${GREEN}✅ Docker está instalado.${RESET}"
-        docker --version
+        echo -e "${YELLOW}Intentando instalar Docker automáticamente...${RESET}"
+
+        # Verificar si el script se está ejecutando con permisos de administrador
+        if [ "$(id -u)" -ne 0 ]; then
+            echo -e "${RED}❌ No tienes permisos de administrador.${RESET}"
+            echo -e "${CYAN}Por favor, ejecuta el script con 'sudo'.${RESET}"
+            exit 1
+        fi
+
+        # Instalación automática de Docker
+        echo -e "${CYAN}🔄 Actualizando repositorios...${RESET}"
+        apt-get update -y && \
+        apt-get install -y apt-transport-https ca-certificates curl software-properties-common && \
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+        add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
+        apt-get update -y && \
+        apt-get install -y docker-ce docker-ce-cli containerd.io
+
+        if [ $? -eq 0 ]; then
+            echo -e "${GREEN}✅ Docker se ha instalado correctamente.${RESET}"
+        else
+            echo -e "${RED}❌ No se pudo instalar Docker automáticamente.${RESET}"
+            echo -e "Por favor, instálalo manualmente desde: ${CYAN}https://docs.docker.com/get-docker/${RESET}"
+            exit 1
+        fi
     fi
-    echo
-    read -p "Presione Enter para regresar al menú principal..."
 }
 
 iniciar_perfil_jugador() {
