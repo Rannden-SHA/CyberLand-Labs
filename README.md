@@ -1,10 +1,13 @@
 
 # **CyberLand Labs Script**
 
+![sh1](https://github.com/user-attachments/assets/96d9b5d2-fcb9-4e7f-8d33-4b11f84962d7)
+
 ## **Descripción**
 El **CyberLand Labs Script** es una herramienta diseñada para facilitar la gestión de máquinas virtuales en entornos Docker, con un enfoque particular en retos de seguridad informática como **Capture The Flag (CTF)**. Este script interactivo permite tanto a jugadores como a creadores administrar, importar, crear y personalizar máquinas, con soporte para escenarios avanzados como pivoting y configuraciones de servicios automatizados.
 
 ---
+
 
 ## **Características Principales**
 - 🎮 **Perfil Jugador**: Importa y ejecuta máquinas CTF listas para jugar.
@@ -64,6 +67,8 @@ Diseñado para quienes desean resolver desafíos en máquinas preconfiguradas.
 - **Iniciar Máquinas**: Ejecuta automáticamente las máquinas importadas.
 - **Listar y Administrar Máquinas**: Visualiza y administra las imágenes y contenedores disponibles.
 - **Limpieza Completa**: Elimina todas las imágenes y contenedores de Docker.
+![sh2](https://github.com/user-attachments/assets/abbc6e36-bc10-44d4-bca6-657b774e77f4)
+
 
 #### **Jugar una Máquina**
 1. Selecciona **"Importar máquina/s desde archivo local"** en el menú.
@@ -77,6 +82,8 @@ Diseñado para quienes desean resolver desafíos en máquinas preconfiguradas.
 
 ### **Perfil Creador**
 El menú del creador está diseñado para quienes desean crear o personalizar máquinas CTF.
+![sh5](https://github.com/user-attachments/assets/c92b21ab-46af-46e6-b958-60db9636c0fb)
+
 
 #### **Crear una Nueva Máquina**
 1. Selecciona **"Crear nueva máquina"**.
@@ -89,6 +96,8 @@ El menú del creador está diseñado para quienes desean crear o personalizar m�
 4. Opcionalmente, el script te preguntará si deseas:
    - Iniciar un contenedor para configuraciones adicionales.
    - Exportar la máquina en formato `.tar`.
+![sh6](https://github.com/user-attachments/assets/7a96d69a-1c8b-4640-a123-a96baa2aaa9f)
+
 
 #### **Configurar Servicios en una Máquina**
 1. Selecciona **"Configurar servicios en una imagen"**.
@@ -109,6 +118,8 @@ Este submenú permite gestionar imágenes y contenedores de Docker.
 - **Conectar**: Conéctate a un contenedor en ejecución.
 - **Eliminar**: Elimina imágenes o contenedores.
 - **Limpieza Completa**: Borra todas las imágenes y contenedores.
+![sh7](https://github.com/user-attachments/assets/841f1cbd-a491-4e22-ba66-62dc30d4b6b8)
+
 
 ---
 
