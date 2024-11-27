@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version: 2.6
+# Version: 2.7
 
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
@@ -38,7 +38,7 @@ menu_principal() {
         echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
         echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
         echo
-        echo -e "${YELLOW}         Ver. 2.6 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
+        echo -e "${YELLOW}         Ver. 2.7 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
         echo -e "${GREEN}===============================================================================${RESET}"                                                                                        
         echo
         echo -e "${CYAN}Este script te permite administrar, crear, exportar y eliminar imágenes y contenedores Docker.${RESET}"
@@ -216,7 +216,7 @@ mostrar_creditos() {
     echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
     echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
     echo
-    echo -e "${LIGHT_CYAN}       Ver. 2.6 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
+    echo -e "${LIGHT_CYAN}       Ver. 2.7 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
     echo -e "${GREEN}===============================================================================${RESET}"    
     echo
 
@@ -332,6 +332,7 @@ actualizar_script_con_sha() {
 
     # URL del archivo en GitHub
     repo_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/main/cyberland.sh"
+    repo_link="https://github.com/Rannden-SHA/CyberLand-Labs"  # Enlace al repositorio principal
 
     # Nombre del archivo actual
     current_file="${BASH_SOURCE[0]}"
@@ -346,7 +347,7 @@ actualizar_script_con_sha() {
     echo "Comprobando la última versión del script en el repositorio..."
 
     # Descargar el archivo remoto y calcular su SHA
-    remote_file="/tmp/cyberland_remote.sh"
+    remote_file="/tmp/cyberland_new.sh"
     curl -s -o "$remote_file" "$repo_url"
 
     if [ $? -ne 0 ]; then
@@ -367,18 +368,19 @@ actualizar_script_con_sha() {
 
     if [ "$local_sha" == "$remote_sha" ]; then
         echo -e "${GREEN}✅ Su script ya está actualizado. (Versión: $current_version)${RESET}"
-        rm -f "$remote_file"  # Eliminar archivo remoto descargado
+        rm -f "$remote_file"  # Eliminar archivo temporal
         read -p "Presione Enter para regresar al menú principal..." dummy
         return
     fi
 
     echo -e "${YELLOW}⚠️  Una nueva versión está disponible.${RESET}"
     echo -e "Versión más reciente: ${LIGHT_GREEN}$remote_version${RESET}"
-    read -p "¿Desea actualizar el script? (s/n): " respuesta
+    echo -e "Puedes revisarla en el repositorio: ${CYAN}$repo_link${RESET}"
+    read -p "¿Desea actualizar el script ahora? (s/n): " respuesta
 
     if [[ ! "$respuesta" =~ ^[sS]$ ]]; then
         echo -e "${LIGHT_RED}❌ Actualización cancelada.${RESET}"
-        rm -f "$remote_file"  # Eliminar archivo remoto descargado
+        rm -f "$remote_file"  # Eliminar archivo temporal
         read -p "Presione Enter para regresar al menú principal..." dummy
         return
     fi
