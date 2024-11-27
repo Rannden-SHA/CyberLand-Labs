@@ -1,14 +1,6 @@
 #!/bin/bash
 
-GREEN="\e[92m"
-LIGHT_GREEN="\e[1;32m"
-RED="\e[31m"
-LIGHT_RED="\e[1;31m"
-YELLOW="\e[93m"
-BLUE="\e[1;34m"
-CYAN="\e[96m"
-MAGENTA="\e[1;35m"
-RESET="\e[0m"
+
 
 if [[ $EUID -ne 0 ]]; then
    echo -e "${RED}❌ Este script debe ejecutarse como root o con sudo.${RESET}" 
@@ -319,6 +311,65 @@ EOF
     fi
 
     read -p "Presione Enter para regresar al menú..."
+}
+
+actualizar_script() {
+    clear
+    echo -e "${GREEN}==========================================${RESET}"
+    echo -e "${LIGHT_GREEN}  🔄 Comprobación de Actualizaciones 🔄${RESET}"
+    echo -e "${GREEN}==========================================${RESET}"
+    echo
+
+    # URL del repositorio en GitHub
+    repo_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/main/cyberland.sh"
+    
+    # Nombre del archivo actual
+    current_file="${BASH_SOURCE[0]}"
+
+    # Nombre del archivo temporal para la nueva versión
+    temp_file="/tmp/cyberland_temp.sh"
+
+    echo "Comprobando la última versión del script en el repositorio..."
+    # Descargar el archivo desde GitHub
+    curl -s -o "$temp_file" "$repo_url"
+
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}❌ Error al conectar con el repositorio. Verifique su conexión a Internet.${RESET}"
+        read -p "Presione Enter para regresar al menú..."
+        return
+    fi
+
+    # Obtener el hash de la versión actual y la nueva
+    current_hash=$(sha256sum "$current_file" | awk '{print $1}')
+    new_hash=$(sha256sum "$temp_file" | awk '{print $1}')
+
+    if [ "$current_hash" == "$new_hash" ]; then
+        echo -e "${GREEN}✅ Su script ya está actualizado.${RESET}"
+        rm -f "$temp_file"  # Eliminar archivo temporal
+        read -p "Presione Enter para regresar al menú..."
+        return
+    fi
+
+    echo -e "${YELLOW}⚠️  Una nueva versión está disponible.${RESET}"
+    echo -e "¿Desea actualizar el script? (s/n)"
+    read -p "Opción: " confirmacion
+
+    if [[ ! "$confirmacion" =~ ^[sS]$ ]]; then
+        echo -e "${LIGHT_RED}❌ Actualización cancelada.${RESET}"
+        rm -f "$temp_file"  # Eliminar archivo temporal
+        read -p "Presione Enter para regresar al menú..."
+        return
+    fi
+
+    echo "Actualizando el script..."
+    # Copiar el nuevo archivo al lugar del actual
+    mv "$temp_file" "$current_file"
+    chmod +x "$current_file"  # Dar permisos de ejecución
+
+    echo -e "${GREEN}🎉 Actualización completada.${RESET}"
+    echo "Reiniciando el script..."
+    sudo bash "$current_file"
+    exit 0
 }
 
 #######################################################################
@@ -926,5 +977,7 @@ salir_script() {
 
     exit 0
 }
+
+actualizar_script
 
 menu_principal
