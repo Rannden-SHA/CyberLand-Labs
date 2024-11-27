@@ -330,17 +330,14 @@ actualizar_script() {
     echo -e "${GREEN}==========================================${RESET}"
     echo
 
-    # URL del repositorio en GitHub
-    repo_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/refs/heads/main/cyberland.sh"
+    # URL directa al contenido del script
+    repo_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/main/cyberland.sh"
 
-    # Nombre del archivo actual
-    current_file="${BASH_SOURCE[0]}"
-
-    # Nombre del archivo temporal para la nueva versión
+    # Ruta al archivo temporal
     temp_file="/tmp/cyberland_temp.sh"
 
     echo "Comprobando la última versión del script en el repositorio..."
-    # Descargar el archivo desde GitHub
+    # Descargar el archivo temporalmente
     curl -s -o "$temp_file" "$repo_url"
 
     if [ $? -ne 0 ]; then
@@ -349,16 +346,18 @@ actualizar_script() {
         return
     fi
 
-    # Extraer la versión del archivo actual y el remoto
-    current_version=$(grep -oP '^VERSION="\K[^\"]+' "$current_file")
-    new_version=$(grep -oP '^VERSION="\K[^\"]+' "$temp_file")
+    # Extraer la versión actual del script local
+    local_version=$(grep -Po 'version:\s*\K[0-9.]+' "${BASH_SOURCE[0]}")
+    # Extraer la versión del script remoto
+    remote_version=$(grep -Po 'version:\s*\K[0-9.]+' "$temp_file")
 
-    echo "Versión actual: $current_version"
-    echo "Última versión disponible: $new_version"
+    echo -e "${CYAN}Versión actual: ${local_version}${RESET}"
+    echo -e "${CYAN}Versión disponible: ${remote_version}${RESET}"
 
-    if [ "$current_version" == "$new_version" ]; then
+    # Verificar si la versión remota es mayor
+    if [[ "$remote_version" == "$local_version" || -z "$remote_version" ]]; then
         echo -e "${GREEN}✅ Su script ya está actualizado.${RESET}"
-        rm -f "$temp_file"  # Eliminar archivo temporal
+        rm -f "$temp_file"  # Limpiar archivo temporal
         read -p "Presione Enter para regresar al menú..."
         return
     fi
@@ -369,19 +368,19 @@ actualizar_script() {
 
     if [[ ! "$confirmacion" =~ ^[sS]$ ]]; then
         echo -e "${LIGHT_RED}❌ Actualización cancelada.${RESET}"
-        rm -f "$temp_file"  # Eliminar archivo temporal
+        rm -f "$temp_file"  # Limpiar archivo temporal
         read -p "Presione Enter para regresar al menú..."
         return
     fi
 
     echo "Actualizando el script..."
-    # Copiar el nuevo archivo al lugar del actual
-    mv "$temp_file" "$current_file"
-    chmod +x "$current_file"  # Dar permisos de ejecución
+    # Reemplazar el archivo actual con el nuevo
+    mv "$temp_file" "${BASH_SOURCE[0]}"
+    chmod +x "${BASH_SOURCE[0]}"  # Dar permisos de ejecución
 
     echo -e "${GREEN}🎉 Actualización completada.${RESET}"
     echo "Reiniciando el script..."
-    sudo bash exit
+    sudo bash "${BASH_SOURCE[0]}"
     exit 0
 }
 
