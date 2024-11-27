@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Versión actual
-CURRENT_VERSION="2.2.0"
+CURRENT_VERSION="2.2.1"
 
 # URLs
 REPO="Rannden-SHA/CyberLand-Labs"
@@ -9,15 +9,7 @@ VERSION_URL="https://raw.githubusercontent.com/$REPO/main/version.txt"
 SCRIPT_URL="https://raw.githubusercontent.com/$REPO/main/cyberland.sh"
 LOCAL_SCRIPT_PATH="$0"
 
-GREEN="\e[92m"
-LIGHT_GREEN="\e[1;32m"
-RED="\e[31m"
-LIGHT_RED="\e[1;31m"
-YELLOW="\e[93m"
-BLUE="\e[1;34m"
-CYAN="\e[96m"
-MAGENTA="\e[1;35m"
-RESET="\e[0m"
+
 
 if [[ $EUID -ne 0 ]]; then
    echo -e "${RED}❌ Este script debe ejecutarse como root o con sudo.${RESET}" 
