@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION="2.3.5"
+# version: 2.3.5
 
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
