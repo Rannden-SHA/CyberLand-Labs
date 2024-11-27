@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# version: 2.3.5
+VERSION=2.3.5
 
 
 
@@ -318,61 +318,46 @@ EOF
 actualizar_script() {
     clear
     echo -e "${GREEN}==========================================${RESET}"
-    echo -e "${LIGHT_GREEN}  🔄 Comprobación de Actualizaciones 🔄${RESET}"
+    echo -e "${LIGHT_GREEN}  🔄 Actualizando CyberLand Script 🔄${RESET}"
     echo -e "${GREEN}==========================================${RESET}"
     echo
 
-    # URL directa al contenido del script
-    repo_url="https://github.com/Rannden-SHA/CyberLand-Labs/raw/refs/heads/main/cyberland.sh"
+    # URL directa al contenido del script en el repositorio
+    repo_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/refs/heads/main/cyberland.sh"
 
-    # Ruta al archivo temporal
-    temp_file="/tmp/cyberland_temp.sh"
+    # Obtener el nombre del archivo actual
+    current_file="${BASH_SOURCE[0]}"
+    
+    # Obtener la última versión del script
+    version=$(curl -s "$repo_url" | grep -Eo "VERSION=[0-9.]+" | cut -d= -f2)
 
-    echo "Comprobando la última versión del script en el repositorio..."
-    # Descargar el archivo temporalmente
-    curl -s -o "$temp_file" "$repo_url"
+    if [ -z "$version" ]; then
+        echo -e "${RED}❌ No se pudo obtener la versión del script.${RESET}"
+        read -p "Presione Enter para regresar al menú..."
+        return
+    fi
+
+    # Crear el nombre del nuevo archivo con la versión
+    new_file="cyberland_v${version}.sh"
+
+    echo "Descargando la versión más reciente del script: $new_file..."
+    # Descargar el nuevo archivo
+    curl -s -o "$new_file" "$repo_url"
 
     if [ $? -ne 0 ]; then
-        echo -e "${RED}❌ Error al conectar con el repositorio. Verifique su conexión a Internet.${RESET}"
+        echo -e "${RED}❌ Error al descargar el archivo. Verifique su conexión a Internet.${RESET}"
         read -p "Presione Enter para regresar al menú..."
         return
     fi
 
-    # Extraer la versión actual del script local
-    local_version=$(grep -Po 'version:\s*\K[0-9.]+' "${BASH_SOURCE[0]}")
-    # Extraer la versión del script remoto
-    remote_version=$(grep -Po 'version:\s*\K[0-9.]+' "$temp_file")
+    # Dar permisos de ejecución al nuevo archivo
+    chmod +x "$new_file"
 
-    echo -e "${CYAN}Versión actual: ${local_version}${RESET}"
-    echo -e "${CYAN}Versión disponible: ${remote_version}${RESET}"
+    echo -e "${YELLOW}⚠️  El script actualizado se descargó como '$new_file'.${RESET}"
+    echo "Eliminando el archivo actual..."
 
-    # Verificar si la versión remota es mayor
-    if [[ "$remote_version" == "$local_version" || -z "$remote_version" ]]; then
-        echo -e "${GREEN}✅ Su script ya está actualizado.${RESET}"
-        rm -f "$temp_file"  # Limpiar archivo temporal
-        read -p "Presione Enter para regresar al menú..."
-        return
-    fi
-
-    echo -e "${YELLOW}⚠️  Una nueva versión está disponible.${RESET}"
-    echo -e "¿Desea actualizar el script? (s/n)"
-    read -p "Opción: " confirmacion
-
-    if [[ ! "$confirmacion" =~ ^[sS]$ ]]; then
-        echo -e "${LIGHT_RED}❌ Actualización cancelada.${RESET}"
-        rm -f "$temp_file"  # Limpiar archivo temporal
-        read -p "Presione Enter para regresar al menú..."
-        return
-    fi
-
-    echo "Actualizando el script..."
-    # Reemplazar el archivo actual con el nuevo
-    mv "$temp_file" "${BASH_SOURCE[0]}"
-    chmod +x "${BASH_SOURCE[0]}"  # Dar permisos de ejecución
-
-    echo -e "${GREEN}🎉 Actualización completada.${RESET}"
-    echo "Reiniciando el script..."
-    sudo bash "${BASH_SOURCE[0]}"
+    # Eliminar el archivo actual
+    rm -f "$current_file"
     exit 0
 }
 
