@@ -15,6 +15,37 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+comprobar_requisitos() {
+    if ! command -v docker &> /dev/null; then
+        echo -e "${RED}❌ Docker no está instalado.${RESET}"
+        echo -e "${YELLOW}Intentando instalar Docker automáticamente...${RESET}"
+
+        # Verificar si el script se está ejecutando con permisos de administrador
+        if [ "$(id -u)" -ne 0 ]; then
+            echo -e "${RED}❌ No tienes permisos de administrador.${RESET}"
+            echo -e "${CYAN}Por favor, ejecuta el script con 'sudo'.${RESET}"
+            exit 1
+        fi
+
+        # Instalación automática de Docker
+        echo -e "${CYAN}🔄 Actualizando repositorios...${RESET}"
+        apt-get update -y && \
+        apt-get install -y apt-transport-https ca-certificates curl software-properties-common && \
+        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
+        add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
+        apt-get update -y && \
+        apt-get install -y docker-ce docker-ce-cli containerd.io
+
+        if [ $? -eq 0 ]; then
+            echo -e "${GREEN}✅ Docker se ha instalado correctamente.${RESET}"
+        else
+            echo -e "${RED}❌ No se pudo instalar Docker automáticamente.${RESET}"
+            echo -e "Por favor, instálalo manualmente desde: ${CYAN}https://docs.docker.com/get-docker/${RESET}"
+            exit 1
+        fi
+    fi
+}
+
 comprobar_requisitos
 
 #######################################################################
@@ -861,37 +892,6 @@ limpiar_docker() {
 
     echo -e "${CYAN}🎉 Limpieza completada. Archivos .tar no se han eliminado.${RESET}"
     read -p "Presione Enter para regresar al menú..."
-}
-
-comprobar_requisitos() {
-    if ! command -v docker &> /dev/null; then
-        echo -e "${RED}❌ Docker no está instalado.${RESET}"
-        echo -e "${YELLOW}Intentando instalar Docker automáticamente...${RESET}"
-
-        # Verificar si el script se está ejecutando con permisos de administrador
-        if [ "$(id -u)" -ne 0 ]; then
-            echo -e "${RED}❌ No tienes permisos de administrador.${RESET}"
-            echo -e "${CYAN}Por favor, ejecuta el script con 'sudo'.${RESET}"
-            exit 1
-        fi
-
-        # Instalación automática de Docker
-        echo -e "${CYAN}🔄 Actualizando repositorios...${RESET}"
-        apt-get update -y && \
-        apt-get install -y apt-transport-https ca-certificates curl software-properties-common && \
-        curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add - && \
-        add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" && \
-        apt-get update -y && \
-        apt-get install -y docker-ce docker-ce-cli containerd.io
-
-        if [ $? -eq 0 ]; then
-            echo -e "${GREEN}✅ Docker se ha instalado correctamente.${RESET}"
-        else
-            echo -e "${RED}❌ No se pudo instalar Docker automáticamente.${RESET}"
-            echo -e "Por favor, instálalo manualmente desde: ${CYAN}https://docs.docker.com/get-docker/${RESET}"
-            exit 1
-        fi
-    fi
 }
 
 iniciar_perfil_jugador() {
