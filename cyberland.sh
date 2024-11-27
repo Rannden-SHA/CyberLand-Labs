@@ -1,7 +1,5 @@
 #!/bin/bash
 
-VERSION=2.2.1
-
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
 RED="\e[31m"
@@ -323,22 +321,38 @@ EOF
     read -p "Presione Enter para regresar al menú..."
 }
 
-verificar_version() {
-    local github_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/refs/heads/main/cyberland.sh"
-    local remote_version
+actualizar_script_con_sha() {
+    clear
+    echo -e "${GREEN}==========================================${RESET}"
+    echo -e "${LIGHT_GREEN}  🔄 Comprobación de Actualizaciones 🔄${RESET}"
+    echo -e "${GREEN}==========================================${RESET}"
+    echo
 
-    # Descargar el script remoto a una variable
-    remote_version=$(curl -s "$github_url" | grep -m1 "VERSION=" | cut -d'=' -f2 | tr -d '"')
+    # URL del archivo en GitHub
+    repo_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/main/cyberland.sh"
 
-    if [ -z "$remote_version" ]; then
-        # No se pudo obtener la versión remota
+    # Nombre del archivo actual
+    current_file="${BASH_SOURCE[0]}"
+
+    echo "Comprobando la última versión del script en el repositorio..."
+
+    # Descargar y calcular SHA del archivo remoto
+    remote_sha=$(curl -s "$repo_url" | sha256sum | awk '{print $1}')
+
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}❌ Error al conectar con el repositorio. Verifique su conexión a Internet.${RESET}"
         return
     fi
 
-    # Comparar versiones
-    if [ "$VERSION" != "$remote_version" ]; then
-        echo -e "\n${YELLOW}⚠️ Nueva versión disponible (${remote_version}).${RESET}"
-        echo -e "Descarga la última versión desde: ${CYAN}https://github.com/Rannden-SHA/CyberLand-Labs${RESET}\n"
+    # Calcular SHA del archivo local
+    local_sha=$(sha256sum "$current_file" | awk '{print $1}')
+
+    # Comparar SHAs
+    if [ "$local_sha" == "$remote_sha" ]; then
+        echo -e "${GREEN}✅ Su script ya está actualizado.${RESET}"
+    else
+        echo -e "${YELLOW}⚠️  Una nueva versión está disponible.${RESET}"
+        echo -e "📥 Puede descargar la última versión desde: https://github.com/Rannden-SHA/CyberLand-Labs"
     fi
 }
 
@@ -949,7 +963,7 @@ salir_script() {
 }
 
 # Verificar si hay una nueva versión disponible
-verificar_version
+actualizar_script_con_sha
 
 # Mostrar Menú Principal
 menu_principal
