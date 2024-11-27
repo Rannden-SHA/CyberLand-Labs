@@ -1,14 +1,6 @@
 #!/bin/bash
 
-GREEN="\e[92m"
-LIGHT_GREEN="\e[1;32m"
-RED="\e[31m"
-LIGHT_RED="\e[1;31m"
-YELLOW="\e[93m"
-BLUE="\e[1;34m"
-CYAN="\e[96m"
-MAGENTA="\e[1;35m"
-RESET="\e[0m"
+
 
 if [[ $EUID -ne 0 ]]; then
    echo -e "${RED}❌ Este script debe ejecutarse como root o con sudo.${RESET}" 
@@ -341,6 +333,7 @@ actualizar_script_con_sha() {
 
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Error al conectar con el repositorio. Verifique su conexión a Internet.${RESET}"
+        read -p "Presione Enter para regresar al menú principal..." dummy
         return
     fi
 
@@ -354,6 +347,9 @@ actualizar_script_con_sha() {
         echo -e "${YELLOW}⚠️  Una nueva versión está disponible.${RESET}"
         echo -e "📥 Puede descargar la última versión desde: https://github.com/Rannden-SHA/CyberLand-Labs"
     fi
+
+    # Requerir que el usuario presione Enter para continuar
+    read -p "Presione Enter para regresar al menú principal..." dummy
 }
 
 #######################################################################
