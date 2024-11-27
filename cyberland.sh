@@ -323,7 +323,7 @@ actualizar_script() {
     echo
 
     # URL directa al contenido del script
-    repo_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/main/cyberland.sh"
+    repo_url="https://github.com/Rannden-SHA/CyberLand-Labs/raw/refs/heads/main/cyberland.sh"
 
     # Ruta al archivo temporal
     temp_file="/tmp/cyberland_temp.sh"
