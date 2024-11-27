@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Versión actual
+CURRENT_VERSION="2.2.0"
+
+# URLs
+REPO="Rannden-SHA/CyberLand-Labs"
+VERSION_URL="https://raw.githubusercontent.com/$REPO/main/version.txt"
+SCRIPT_URL="https://raw.githubusercontent.com/$REPO/main/cyberland.sh"
+LOCAL_SCRIPT_PATH="$0"
+
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
 RED="\e[31m"
@@ -319,6 +328,32 @@ EOF
     fi
 
     read -p "Presione Enter para regresar al menú..."
+}
+
+# Comprobar la versión más reciente
+check_version() {
+    REMOTE_VERSION=$(curl -s $VERSION_URL)
+    if [[ "$REMOTE_VERSION" != "$CURRENT_VERSION" ]]; then
+        echo "Nueva versión disponible: $REMOTE_VERSION (actual: $CURRENT_VERSION)"
+        update_script
+    else
+        echo "Ya estás usando la última versión ($CURRENT_VERSION)."
+    fi
+}
+
+# Actualizar el script
+update_script() {
+    echo "Actualizando el script..."
+    curl -s -o "$LOCAL_SCRIPT_PATH" "$SCRIPT_URL"
+    chmod +x "$LOCAL_SCRIPT_PATH"
+    echo "Script actualizado a la última versión."
+    restart_script
+}
+
+# Reiniciar el script
+restart_script() {
+    echo "Reiniciando el script..."
+    exec bash "$LOCAL_SCRIPT_PATH" "$@"
 }
 
 #######################################################################
@@ -927,4 +962,8 @@ salir_script() {
     exit 0
 }
 
+# Ejecutar verificación de versión
+check_version
+
+# Mostrar Menú Principal
 menu_principal
