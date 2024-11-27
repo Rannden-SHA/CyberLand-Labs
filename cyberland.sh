@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Version: 2.7
+VERSION="2.7"
 
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
@@ -38,7 +39,7 @@ menu_principal() {
         echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
         echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
         echo
-        echo -e "${YELLOW}         Ver. 2.7 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
+        echo -e "${YELLOW}         Ver. ${VERSION} - Welcome to CyberLand Labs - Hack the Future!${RESET}"
         echo -e "${GREEN}===============================================================================${RESET}"                                                                                        
         echo
         echo -e "${CYAN}Este script te permite administrar, crear, exportar y eliminar imágenes y contenedores Docker.${RESET}"
@@ -216,7 +217,7 @@ mostrar_creditos() {
     echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
     echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
     echo
-    echo -e "${LIGHT_CYAN}       Ver. 2.7 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
+    echo -e "${LIGHT_CYAN}       Ver. ${VERSION} - Welcome to CyberLand Labs - Hack the Future!${RESET}"
     echo -e "${GREEN}===============================================================================${RESET}"    
     echo
 
@@ -226,6 +227,7 @@ mostrar_creditos() {
     echo -e "${CYAN}Contribuciones: ${LIGHT_RED}Desarrollo, programación y mejora de la web${RESET}"
     echo -e "${CYAN}Web: ${LIGHT_GREEN}https://cyberlandsec.com${RESET}"
     echo -e "${CYAN}LinkedIn: ${LIGHT_GREEN}https://www.linkedin.com/in/sr-gisbert/${RESET}"
+    echo -e "${CYAN}GitHub: ${LIGHT_GREEN}https://github.com/Rannden-SHA/${RESET}"
     echo
 
     # Creador Principal de Máquinas
