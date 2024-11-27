@@ -670,7 +670,7 @@ iniciar_maquina_exportada() {
         fi
     fi
     echo "Iniciando el contenedor '$nombre_maquina'..."
-    docker run -d --name "$contenedor_nombre" "$nombre_maquina" tail -f /dev/nul
+    docker run -d --name "$contenedor_nombre" "$nombre_maquina"
     container_status=$(docker ps -q -f "name=$contenedor_nombre")
     if [ -z "$container_status" ]; then
         echo "❌ El contenedor no se está ejecutando. Esto podría ser por un error en el contenedor."
