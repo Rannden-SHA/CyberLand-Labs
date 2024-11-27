@@ -373,7 +373,7 @@ actualizar_script() {
 
     echo -e "${GREEN}🎉 Actualización completada.${RESET}"
     echo "Reiniciando el script..."
-    sudo bash "$current_file"
+    sudo bash exit
     exit 0
 }
 
