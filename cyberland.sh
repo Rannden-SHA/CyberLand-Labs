@@ -591,13 +591,14 @@ importar_maquina() {
 
         echo "Importando la máquina desde '$archivo_maquina'..."
         imagen_id=$(docker load -i "$archivo_maquina" | awk '/Loaded image: / {print $3}')
-        if [ $? -eq 0 ]; then
-            echo "🎉 La máquina ha sido importada exitosamente."
-            echo "Imagen cargada: $imagen_id"
-        else
-            echo "❌ Ocurrió un error al importar la máquina desde '$archivo_maquina'."
+
+        if [ -z "$imagen_id" ]; then
+            echo "❌ No se pudo obtener el nombre o tag de la imagen. Verifique el archivo '$archivo_maquina'."
             continue
         fi
+
+        echo "🎉 La máquina ha sido importada exitosamente."
+        echo "Imagen cargada: $imagen_id"
 
         # Generar nombre del contenedor automáticamente
         contenedor_nombre="cyberland_${imagen_id//[:\/]/_}" # Reemplaza caracteres no válidos para nombres
