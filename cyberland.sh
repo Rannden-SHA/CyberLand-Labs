@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Version: 2.6
+
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
 RED="\e[31m"
@@ -36,7 +38,7 @@ menu_principal() {
         echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
         echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
         echo
-        echo -e "${YELLOW}         Ver. 2.5 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
+        echo -e "${YELLOW}         Ver. 2.6 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
         echo -e "${GREEN}===============================================================================${RESET}"                                                                                        
         echo
         echo -e "${CYAN}Este script te permite administrar, crear, exportar y eliminar imágenes y contenedores Docker.${RESET}"
@@ -214,7 +216,7 @@ mostrar_creditos() {
     echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
     echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
     echo
-    echo -e "${LIGHT_CYAN}       Ver. 2.5 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
+    echo -e "${LIGHT_CYAN}       Ver. 2.6 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
     echo -e "${GREEN}===============================================================================${RESET}"    
     echo
 
@@ -334,10 +336,18 @@ actualizar_script_con_sha() {
     # Nombre del archivo actual
     current_file="${BASH_SOURCE[0]}"
 
+    # Extraer la versión actual desde el archivo actual
+    current_version=$(grep -m1 '^# Version:' "$current_file" | awk '{print $3}')
+    if [ -z "$current_version" ]; then
+        current_version="Desconocida"
+    fi
+
+    echo -e "Versión actual del script: ${LIGHT_GREEN}$current_version${RESET}"
     echo "Comprobando la última versión del script en el repositorio..."
 
-    # Descargar y calcular SHA del archivo remoto
-    remote_sha=$(curl -s "$repo_url" | sha256sum | awk '{print $1}')
+    # Descargar el archivo remoto y calcular su SHA
+    remote_file="/tmp/cyberland_remote.sh"
+    curl -s -o "$remote_file" "$repo_url"
 
     if [ $? -ne 0 ]; then
         echo -e "${RED}❌ Error al conectar con el repositorio. Verifique su conexión a Internet.${RESET}"
@@ -345,42 +355,39 @@ actualizar_script_con_sha() {
         return
     fi
 
-    # Calcular SHA del archivo local
-    local_sha=$(sha256sum "$current_file" | awk '{print $1}')
+    # Extraer la versión remota desde el archivo descargado
+    remote_version=$(grep -m1 '^# Version:' "$remote_file" | awk '{print $3}')
+    if [ -z "$remote_version" ]; then
+        remote_version="Desconocida"
+    fi
 
-    # Comparar SHAs
+    # Calcular SHA del archivo local y remoto
+    local_sha=$(sha256sum "$current_file" | awk '{print $1}')
+    remote_sha=$(sha256sum "$remote_file" | awk '{print $1}')
+
     if [ "$local_sha" == "$remote_sha" ]; then
-        echo -e "${GREEN}✅ Su script ya está actualizado.${RESET}"
+        echo -e "${GREEN}✅ Su script ya está actualizado. (Versión: $current_version)${RESET}"
+        rm -f "$remote_file"  # Eliminar archivo remoto descargado
         read -p "Presione Enter para regresar al menú principal..." dummy
         return
     fi
 
-    # Si hay una actualización, preguntar al usuario
     echo -e "${YELLOW}⚠️  Una nueva versión está disponible.${RESET}"
+    echo -e "Versión más reciente: ${LIGHT_GREEN}$remote_version${RESET}"
     read -p "¿Desea actualizar el script? (s/n): " respuesta
 
     if [[ ! "$respuesta" =~ ^[sS]$ ]]; then
         echo -e "${LIGHT_RED}❌ Actualización cancelada.${RESET}"
+        rm -f "$remote_file"  # Eliminar archivo remoto descargado
         read -p "Presione Enter para regresar al menú principal..." dummy
         return
     fi
 
-    echo "Descargando la nueva versión..."
-
-    temp_file="/tmp/cyberland_new.sh"
-    curl -s -o "$temp_file" "$repo_url"
-
-    if [ $? -ne 0 ]; then
-        echo -e "${RED}❌ Error al descargar la nueva versión. Verifique su conexión a Internet.${RESET}"
-        read -p "Presione Enter para regresar al menú principal..." dummy
-        return
-    fi
-
-    # Dar permisos de ejecución al archivo descargado
-    chmod +x "$temp_file"
+    echo "Actualizando el script..."
 
     # Reemplazar el archivo actual con el nuevo
-    mv "$temp_file" "$(dirname "$current_file")/cyberland.sh"
+    chmod +x "$remote_file"
+    mv "$remote_file" "$(dirname "$current_file")/cyberland.sh"
 
     echo -e "${GREEN}🎉 Actualización completada.${RESET}"
     echo -e "Se ha descargado el archivo actualizado: ${LIGHT_GREEN}cyberland.sh${RESET}"
