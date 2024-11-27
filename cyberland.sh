@@ -36,7 +36,7 @@ menu_principal() {
         echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
         echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
         echo
-        echo -e "${YELLOW}         Ver. 2.2 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
+        echo -e "${YELLOW}         Ver. 2.5 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
         echo -e "${GREEN}===============================================================================${RESET}"                                                                                        
         echo
         echo -e "${CYAN}Este script te permite administrar, crear, exportar y eliminar imágenes y contenedores Docker.${RESET}"
@@ -214,7 +214,7 @@ mostrar_creditos() {
     echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
     echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
     echo
-    echo -e "${LIGHT_CYAN}       Ver. 2.2 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
+    echo -e "${LIGHT_CYAN}       Ver. 2.5 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
     echo -e "${GREEN}===============================================================================${RESET}"    
     echo
 
@@ -603,7 +603,7 @@ importar_maquina() {
         # Generar nombre del contenedor automáticamente
         contenedor_nombre="cyberland_${imagen_id//[:\/]/_}" # Reemplaza caracteres no válidos para nombres
         echo "Iniciando la máquina como contenedor '$contenedor_nombre'..."
-        docker run -d --name "$contenedor_nombre" "$imagen_id" tail -f /dev/null
+        docker run -d --name "$contenedor_nombre" "$imagen_id"
         if [ $? -eq 0 ]; then
             container_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$contenedor_nombre")
             if [ -z "$container_ip" ]; then
