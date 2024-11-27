@@ -214,7 +214,7 @@ mostrar_creditos() {
     echo -e "${GREEN}                     ███████╗██║  ██║██████╔╝███████║${RESET}"                       
     echo -e "${GREEN}                     ╚══════╝╚═╝  ╚═╝╚═════╝ ╚══════╝${RESET}" 
     echo
-    echo -e "${LIGHT_CYAN}       Ver. 2.1 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
+    echo -e "${LIGHT_CYAN}       Ver. 2.2 - Welcome to CyberLand Labs - Hack the Future!${RESET}"
     echo -e "${GREEN}===============================================================================${RESET}"    
     echo
 
