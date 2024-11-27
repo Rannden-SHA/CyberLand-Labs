@@ -1,7 +1,5 @@
 #!/bin/bash
 
-VERSION=2.3.6
-
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
 RED="\e[31m"
@@ -321,52 +319,6 @@ EOF
     fi
 
     read -p "Presione Enter para regresar al menú..."
-}
-
-actualizar_script() {
-    clear
-    echo -e "${GREEN}==========================================${RESET}"
-    echo -e "${LIGHT_GREEN}  🔄 Actualizando CyberLand Script 🔄${RESET}"
-    echo -e "${GREEN}==========================================${RESET}"
-    echo
-
-    # URL directa al contenido del script en el repositorio
-    repo_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/refs/heads/main/cyberland.sh"
-
-    # Obtener el nombre del archivo actual
-    current_file="${BASH_SOURCE[0]}"
-    
-    # Obtener la última versión del script
-    version=$(curl -s "$repo_url" | grep -Eo "VERSION=[0-9.]+" | cut -d= -f2)
-
-    if [ -z "$version" ]; then
-        echo -e "${RED}❌ No se pudo obtener la versión del script.${RESET}"
-        read -p "Presione Enter para regresar al menú..."
-        return
-    fi
-
-    # Crear el nombre del nuevo archivo con la versión
-    new_file="cyberland_v${version}.sh"
-
-    echo "Descargando la versión más reciente del script: $new_file..."
-    # Descargar el nuevo archivo
-    curl -s -o "$new_file" "$repo_url"
-
-    if [ $? -ne 0 ]; then
-        echo -e "${RED}❌ Error al descargar el archivo. Verifique su conexión a Internet.${RESET}"
-        read -p "Presione Enter para regresar al menú..."
-        return
-    fi
-
-    # Dar permisos de ejecución al nuevo archivo
-    chmod +x "$new_file"
-
-    echo -e "${YELLOW}⚠️  El script actualizado se descargó como '$new_file'.${RESET}"
-    echo "Eliminando el archivo actual..."
-
-    # Eliminar el archivo actual
-    rm -f "$current_file"
-    exit 0
 }
 
 #######################################################################
@@ -974,7 +926,5 @@ salir_script() {
 
     exit 0
 }
-
-actualizar_script
 
 menu_principal
