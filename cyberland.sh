@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VERSION=2.2.0
+
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
 RED="\e[31m"
@@ -319,6 +321,25 @@ EOF
     fi
 
     read -p "Presione Enter para regresar al menú..."
+}
+
+verificar_version() {
+    local github_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/refs/heads/main/cyberland.sh"
+    local remote_version
+
+    # Descargar el script remoto a una variable
+    remote_version=$(curl -s "$github_url" | grep -m1 "VERSION=" | cut -d'=' -f2 | tr -d '"')
+
+    if [ -z "$remote_version" ]; then
+        # No se pudo obtener la versión remota
+        return
+    fi
+
+    # Comparar versiones
+    if [ "$VERSION" != "$remote_version" ]; then
+        echo -e "\n${YELLOW}⚠️ Nueva versión disponible (${remote_version}).${RESET}"
+        echo -e "Descarga la última versión desde: ${CYAN}https://github.com/Rannden-SHA/CyberLand-Labs${RESET}\n"
+    fi
 }
 
 #######################################################################
@@ -926,6 +947,9 @@ salir_script() {
 
     exit 0
 }
+
+# Verificar si hay una nueva versión disponible
+verificar_version
 
 # Mostrar Menú Principal
 menu_principal
