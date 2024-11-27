@@ -396,7 +396,7 @@ exportar_imagen() {
 #################### FUNCIONES PARA LAS MÁQUINAS ######################
 
 crear_maquina() {
-    local HIDDEN_MARKER="TcOhcXVpbmEgZ2VuZXJhZGEgY29uIGN5YmVybGFuZC5zaCBzY3JpcHQgZGVzYXJyb2xsYWRvIHBvciA0azRtMW0zLiDCgUdyYWNpYXMgcG9yIGVsZWdpciBDeWJlckxhbmQgTGFicyEgVmlzaXRhOiBodHRwczovL2N5YmVybGFuZHNlYy5jb20="
+    local HIDDEN_MARKER="TcOhcXVpbmEgZ2VuZXJhZGEgY29uIGN5YmVybGFuZC5zaCBzY3JpcHQgZGVzYXJyb2xsYWRvIHBvciBBZHJpw6FuIEdpc2JlcnQuIEdyYWNpYXMgcG9yIGVsZWdpciBDeWJlckxhbmQgTGFicyEgVmlzaXRhOiBodHRwczovL2N5YmVybGFuZHNlYy5jb20vY3liZXJsYW5kLWxhYnM="
 
     clear
     echo -e "${GREEN}==========================================${RESET}"
