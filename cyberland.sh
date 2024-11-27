@@ -331,7 +331,7 @@ actualizar_script() {
     echo
 
     # URL del repositorio en GitHub
-    repo_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/main/cyberland.sh"
+    repo_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/refs/heads/main/cyberland.sh"
 
     # Nombre del archivo actual
     current_file="${BASH_SOURCE[0]}"
