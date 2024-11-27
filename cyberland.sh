@@ -541,7 +541,7 @@ importar_maquina() {
         # Generar nombre del contenedor automáticamente
         contenedor_nombre="cyberland_${imagen_id//[:\/]/_}" # Reemplaza caracteres no válidos para nombres
         echo "Iniciando la máquina como contenedor '$contenedor_nombre'..."
-        docker run -d --name "$contenedor_nombre" "$imagen_id"
+        docker run -d --name "$contenedor_nombre" "$imagen_id" tail -f /dev/null
         if [ $? -eq 0 ]; then
             container_ip=$(docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' "$contenedor_nombre")
             if [ -z "$container_ip" ]; then
