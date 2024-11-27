@@ -1,5 +1,7 @@
 #!/bin/bash
 
+VERSION="2.3.1"
+
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
 RED="\e[31m"
@@ -330,7 +332,7 @@ actualizar_script() {
 
     # URL del repositorio en GitHub
     repo_url="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/main/cyberland.sh"
-    
+
     # Nombre del archivo actual
     current_file="${BASH_SOURCE[0]}"
 
@@ -347,11 +349,14 @@ actualizar_script() {
         return
     fi
 
-    # Obtener el hash de la versión actual y la nueva
-    current_hash=$(sha256sum "$current_file" | awk '{print $1}')
-    new_hash=$(sha256sum "$temp_file" | awk '{print $1}')
+    # Extraer la versión del archivo actual y el remoto
+    current_version=$(grep -oP '^VERSION="\K[^\"]+' "$current_file")
+    new_version=$(grep -oP '^VERSION="\K[^\"]+' "$temp_file")
 
-    if [ "$current_hash" == "$new_hash" ]; then
+    echo "Versión actual: $current_version"
+    echo "Última versión disponible: $new_version"
+
+    if [ "$current_version" == "$new_version" ]; then
         echo -e "${GREEN}✅ Su script ya está actualizado.${RESET}"
         rm -f "$temp_file"  # Eliminar archivo temporal
         read -p "Presione Enter para regresar al menú..."
