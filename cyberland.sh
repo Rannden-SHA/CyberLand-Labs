@@ -355,10 +355,18 @@ actualizar_script_con_sha() {
         return
     fi
 
-    # Si hay una actualización, descargarla
+    # Si hay una actualización, preguntar al usuario
     echo -e "${YELLOW}⚠️  Una nueva versión está disponible.${RESET}"
+    read -p "¿Desea actualizar el script? (s/n): " respuesta
+
+    if [[ ! "$respuesta" =~ ^[sS]$ ]]; then
+        echo -e "${LIGHT_RED}❌ Actualización cancelada.${RESET}"
+        read -p "Presione Enter para regresar al menú principal..." dummy
+        return
+    fi
+
     echo "Descargando la nueva versión..."
-    
+
     temp_file="/tmp/cyberland_new.sh"
     curl -s -o "$temp_file" "$repo_url"
 
