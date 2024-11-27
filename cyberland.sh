@@ -351,13 +351,35 @@ actualizar_script_con_sha() {
     # Comparar SHAs
     if [ "$local_sha" == "$remote_sha" ]; then
         echo -e "${GREEN}✅ Su script ya está actualizado.${RESET}"
-    else
-        echo -e "${YELLOW}⚠️  Una nueva versión está disponible.${RESET}"
-        echo -e "📥 Puede descargar la última versión desde: https://github.com/Rannden-SHA/CyberLand-Labs"
+        read -p "Presione Enter para regresar al menú principal..." dummy
+        return
     fi
 
-    # Requerir que el usuario presione Enter para continuar
-    read -p "Presione Enter para regresar al menú principal..." dummy
+    # Si hay una actualización, descargarla
+    echo -e "${YELLOW}⚠️  Una nueva versión está disponible.${RESET}"
+    echo "Descargando la nueva versión..."
+    
+    temp_file="/tmp/cyberland_new.sh"
+    curl -s -o "$temp_file" "$repo_url"
+
+    if [ $? -ne 0 ]; then
+        echo -e "${RED}❌ Error al descargar la nueva versión. Verifique su conexión a Internet.${RESET}"
+        read -p "Presione Enter para regresar al menú principal..." dummy
+        return
+    fi
+
+    # Dar permisos de ejecución al archivo descargado
+    chmod +x "$temp_file"
+
+    # Reemplazar el archivo actual con el nuevo
+    mv "$temp_file" "$(dirname "$current_file")/cyberland.sh"
+
+    echo -e "${GREEN}🎉 Actualización completada.${RESET}"
+    echo -e "Se ha descargado el archivo actualizado: ${LIGHT_GREEN}cyberland.sh${RESET}"
+    echo -e "${YELLOW}El script se cerrará ahora. Por favor, ejecute el archivo nuevamente.${RESET}"
+
+    # Cerrar el script
+    exit 0
 }
 
 #######################################################################
