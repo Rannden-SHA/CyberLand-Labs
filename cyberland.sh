@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Version: 1.10.14
-VERSION="1.10.14"
+# Version: 1.10.15
+VERSION="1.10.15"
 
 # Definición de colores
 BLACK="\e[30m"
@@ -477,7 +477,7 @@ listar_maquinas() {
         colores_dificultad=$(asignar_colores_dificultad "$difficulty")
         
         # Mostrar información
-        echo -e "  ${CYAB}${BLACK}  ${name}  ${RESET}"
+        echo -e "  ${CYAN}${BLACK}  ${name}  ${RESET}"
         echo
         echo -e "${YELLOW}Dificultad:${RESET} ${colores_dificultad}  ${difficulty}  ${RESET}"
         echo -e "${LIGHT_MAGENTA}Sistema Operativo:${RESET} ${os}"
