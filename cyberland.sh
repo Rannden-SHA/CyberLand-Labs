@@ -462,7 +462,7 @@ listar_maquinas() {
         fi
 
         # Mostrar información
-        echo -e "{$BG_GREEN}${LIGHT_RED}${name}${RESET}"  # Nombre en amarillo
+        echo -e "${BG_GREEN}${LIGHT_RED}${name}${RESET}"  # Nombre en amarillo
         echo
         echo -e "${YELLOW}Dificultad:${RESET} ${difficulty}"
         echo -e "${LIGHT_MAGENTA}Sistema Operativo:${RESET} ${os}"
