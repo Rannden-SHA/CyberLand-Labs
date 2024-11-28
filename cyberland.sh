@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version: 1.10.1
+# Version: 1.10.12
 VERSION="1.10.12"
 
 # Definición de colores
