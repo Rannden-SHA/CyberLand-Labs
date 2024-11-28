@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Version: 2.9.4
-VERSION="2.9.4"
+# Version: 2.9.5
+VERSION="2.9.5"
 
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
@@ -348,6 +348,7 @@ actualizar_script_con_sha() {
 
     echo -e "Versión actual del script: ${LIGHT_GREEN}$current_version${RESET}"
     echo "Comprobando la última versión del script en el repositorio..."
+    echo
 
     # Descargar el archivo remoto y calcular su SHA
     remote_file="/tmp/cyberland_new.sh"
@@ -378,7 +379,9 @@ actualizar_script_con_sha() {
 
     echo -e "${YELLOW}⚠️  Una nueva versión está disponible.${RESET}"
     echo -e "Versión más reciente: ${LIGHT_GREEN}$remote_version${RESET}"
+    echo
     echo -e "Puedes revisarla en el repositorio: ${CYAN}$repo_link${RESET}"
+    echo
     read -p "¿Desea actualizar el script ahora? (s/n): " respuesta
 
     if [[ ! "$respuesta" =~ ^[sS]$ ]]; then
@@ -387,7 +390,8 @@ actualizar_script_con_sha() {
         read -p "Presione Enter para regresar al menú principal..." dummy
         return
     fi
-
+    
+    echo
     echo "Actualizando el script..."
 
     # Reemplazar el archivo actual con el nuevo
@@ -395,6 +399,7 @@ actualizar_script_con_sha() {
     mv "$remote_file" "$(dirname "$current_file")/cyberland.sh"
 
     echo -e "${GREEN}🎉 Actualización completada.${RESET}"
+    echo
     echo -e "Se ha descargado el archivo actualizado: ${LIGHT_GREEN}cyberland.sh${RESET}"
     echo -e "${YELLOW}El script se cerrará ahora. Por favor, ejecute el archivo nuevamente.${RESET}"
 
