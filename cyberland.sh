@@ -1,16 +1,49 @@
 #!/bin/bash
 
-# Version: 2.9.7
-VERSION="2.9.7"
+# Version: 2.9.8
+VERSION="2.9.8"
 
-GREEN="\e[92m"
-LIGHT_GREEN="\e[1;32m"
+# Definición de colores
+BLACK="\e[30m"
 RED="\e[31m"
-LIGHT_RED="\e[1;31m"
-YELLOW="\e[93m"
-BLUE="\e[1;34m"
-CYAN="\e[96m"
-MAGENTA="\e[1;35m"
+GREEN="\e[32m"
+YELLOW="\e[33m"
+BLUE="\e[34m"
+MAGENTA="\e[35m"
+CYAN="\e[36m"
+WHITE="\e[37m"
+
+# Colores claros
+LIGHT_BLACK="\e[90m"
+LIGHT_RED="\e[91m"
+LIGHT_GREEN="\e[92m"
+LIGHT_YELLOW="\e[93m"
+LIGHT_BLUE="\e[94m"
+LIGHT_MAGENTA="\e[95m"
+LIGHT_CYAN="\e[96m"
+LIGHT_WHITE="\e[97m"
+
+# Fondo de colores
+BG_BLACK="\e[40m"
+BG_RED="\e[41m"
+BG_GREEN="\e[42m"
+BG_YELLOW="\e[43m"
+BG_BLUE="\e[44m"
+BG_MAGENTA="\e[45m"
+BG_CYAN="\e[46m"
+BG_WHITE="\e[47m"
+
+# Fondos claros
+BG_LIGHT_BLACK="\e[100m"
+BG_LIGHT_RED="\e[101m"
+BG_LIGHT_GREEN="\e[102m"
+BG_LIGHT_YELLOW="\e[103m"
+BG_LIGHT_BLUE="\e[104m"
+BG_LIGHT_MAGENTA="\e[105m"
+BG_LIGHT_CYAN="\e[106m"
+BG_LIGHT_WHITE="\e[107m"
+
+# Restablecer formato
 RESET="\e[0m"
 
 if [[ $EUID -ne 0 ]]; then
@@ -429,10 +462,10 @@ listar_maquinas() {
         fi
 
         # Mostrar información
-        echo -e "${LIGHT_RED}${name}${RESET}"  # Nombre en amarillo
+        echo -e "{$BG_GREEN}${LIGHT_RED}${name}${RESET}"  # Nombre en amarillo
         echo
         echo -e "${YELLOW}Dificultad:${RESET} ${difficulty}"
-        echo -e "${BLUE}Sistema Operativo:${RESET} ${os}"
+        echo -e "${LIGHT_MAGENTA}Sistema Operativo:${RESET} ${os}"
         echo -e "${CYAN}📎 Enlace Web:${RESET} ${url_web}"
         echo -e "${CYAN}📥 Enlace de Descarga:${RESET} ${url_descarga}"
         echo -e "${GREEN}---------------------------------------------------------------${RESET}"
