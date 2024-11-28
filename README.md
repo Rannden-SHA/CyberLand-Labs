@@ -17,6 +17,7 @@ El **CyberLand Labs Script** es una herramienta diseñada para facilitar la gest
   - Configura servicios para iniciar automáticamente en contenedores.
 - 🌐 **Soporte Multimáquina**: Importa y ejecuta múltiples máquinas para escenarios avanzados como pivoting.
 - ⚙️ **Configuración de Servicios**: Define servicios que se ejecutan automáticamente al iniciar una máquina.
+- 🔃 **Gestión de Actualizaciones**: Si existe una nueva versión del script, al iniciarlo te preguntará si quieres actualizarlo.
 
 ---
 
