@@ -19,6 +19,9 @@ El **CyberLand Labs Script** es una herramienta diseñada para facilitar la gest
 - ⚙️ **Configuración de Servicios**: Define servicios que se ejecutan automáticamente al iniciar una máquina.
 - 🔃 **Gestión de Actualizaciones**: Si existe una nueva versión del script, al iniciarlo te preguntará si quieres actualizarlo.
 
+  ![updates](https://github.com/user-attachments/assets/0210fda1-6c01-4628-a8a8-4c8ee701fa82)
+
+
 ---
 
 ## **Requisitos**
