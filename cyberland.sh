@@ -454,6 +454,18 @@ listar_maquinas() {
     # URL del archivo
     url_maquinas="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/refs/heads/main/maquinas.txt"
 
+    # Función para asignar colores según dificultad
+    asignar_colores_dificultad() {
+        case $1 in
+            "Muy Fácil") echo -e "${BG_LIGHT_GREEN}${BLACK}" ;;
+            "Fácil") echo -e "${BG_GREEN}${WHITE}" ;;
+            "Media") echo -e "${BG_YELLOW}${BLACK}" ;;
+            "Difícil") echo -e "${BG_RED}${WHITE}" ;;
+            "Extremo") echo -e "${BG_MAGENTA}${WHITE}" ;;
+            *) echo -e "${RESET}" ;;  # Por defecto sin formato
+        esac
+    }
+
     # Descargar y procesar el archivo directamente
     curl -s "$url_maquinas" | while IFS="|" read -r _ name url_web url_descarga difficulty os; do
         # Saltar líneas vacías
@@ -461,9 +473,11 @@ listar_maquinas() {
             continue
         fi
 
+        # Aplicar colores dinámicos según la dificultad
+        colores_dificultad=$(asignar_colores_dificultad "$difficulty")
+        
         # Mostrar información
-        echo -e "${BG_GREEN}${LIGHT_RED}${name}${RESET}"  # Nombre en amarillo
-        echo
+        echo -e "${colores_dificultad} ${name} ${RESET}"  # Nombre con colores según dificultad
         echo -e "${YELLOW}Dificultad:${RESET} ${difficulty}"
         echo -e "${LIGHT_MAGENTA}Sistema Operativo:${RESET} ${os}"
         echo -e "${CYAN}📎 Enlace Web:${RESET} ${url_web}"
