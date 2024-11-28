@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Version: 2.9
+# Version: 2.9.1
 VERSION="2.9"
 
 GREEN="\e[92m"
@@ -203,6 +203,7 @@ menu_creador() {
 mostrar_creditos() {
     clear
     # Encabezado
+    echo
     echo -e "${GREEN}  ██████╗██╗   ██╗██████╗ ███████╗██████╗ ██╗      █████╗ ███╗   ██╗██████╗${RESET}"
     echo -e "${GREEN} ██╔════╝╚██╗ ██╔╝██╔══██╗██╔════╝██╔══██╗██║     ██╔══██╗████╗  ██║██╔══██╗${RESET}"
     echo -e "${GREEN} ██║      ╚████╔╝ ██████╔╝█████╗  ██████╔╝██║     ███████║██╔██╗ ██║██║  ██║${RESET}"
@@ -340,7 +341,7 @@ actualizar_script_con_sha() {
     current_file="${BASH_SOURCE[0]}"
 
     # Extraer la versión actual desde el archivo actual
-    current_version=$(grep -m1 '^# Version:' "$current_file" | awk '{print $3}')
+    current_version=$(grep -m1 '^# Version:' "$current_file" | awk '{print $5}')
     if [ -z "$current_version" ]; then
         current_version="Desconocida"
     fi
