@@ -45,7 +45,7 @@ menu_principal() {
         echo -e "${CYAN}Este script te permite administrar, crear, exportar y eliminar imágenes y contenedores Docker.${RESET}"
         echo -e "${CYAN}Podrás crear y configurar nuevas máquinas para CTFs, exportarlas y, si lo deseas, jugar en ellas.${RESET}"
         echo
-        echo -e "${MAGENTA}🔹 Existen cinco opciones disponibles: ${RESET}"
+        echo -e "${MAGENTA}🔹 Elige una opción: ${RESET}"
         echo -e "${LIGHT_RED}1) Perfil Jugador 🕹️   - Descargar, ejecutar y resolver desafíos en las máquinas CTF ya configuradas.${RESET}"
         echo -e "${YELLOW}2) Perfil Creador ⚒️   - Crear, configurar y exportar nuevas máquinas CTF.${RESET}"
         echo -e "${GREEN}3) Listar Máquinas CTF Disponibles 📋${RESET}" 
