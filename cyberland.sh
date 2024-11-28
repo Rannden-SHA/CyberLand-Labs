@@ -46,11 +46,12 @@ menu_principal() {
         echo -e "${CYAN}Podrás crear y configurar nuevas máquinas para CTFs, exportarlas y, si lo deseas, jugar en ellas.${RESET}"
         echo
         echo -e "${MAGENTA}🔹 Existen cinco opciones disponibles: ${RESET}"
-        echo -e "${LIGHT_RED}1) Perfil Jugador    - Descargar, ejecutar y resolver desafíos en las máquinas CTF ya configuradas.${RESET}"
-        echo -e "${YELLOW}2) Perfil Creador    - Crear, configurar y exportar nuevas máquinas CTF.${RESET}"
-        echo -e "${GREEN}3)${RESET} Comprobar Requisitos"
-        echo -e "${GREEN}4)${RESET} Créditos"
-        echo -e "${GREEN}5)${RESET} Salir del script"
+        echo -e "${LIGHT_RED}1) Perfil Jugador 🕹️   - Descargar, ejecutar y resolver desafíos en las máquinas CTF ya configuradas.${RESET}"
+        echo -e "${YELLOW}2) Perfil Creador ⚒️   - Crear, configurar y exportar nuevas máquinas CTF.${RESET}"
+        echo -e "${GREEN}3) Listar Máquinas CTF Disponibles 📋${RESET}" 
+        echo -e "${GREEN}4)${RESET} Comprobar Requisitos 🔍"
+        echo -e "${GREEN}5)${RESET} Créditos 📜"
+        echo -e "${GREEN}6)${RESET} Salir del script"
         echo
         echo -e "🌐 CyberLand Web ${LIGHT_GREEN}https://cyberlandsec.com/cyberland-labs${RESET}"
         echo
@@ -66,12 +67,15 @@ menu_principal() {
                 iniciar_perfil_creador
                 ;;
             3)
-                comprobar_requisitos
+                listar_maquinas
                 ;;
             4)
-                mostrar_creditos
+                comprobar_requisitos
                 ;;
             5)
+                mostrar_creditos
+                ;;
+            6)
                 salir_script
                 ;;
             *)
@@ -405,6 +409,40 @@ actualizar_script_con_sha() {
 
     # Cerrar el script
     exit 0
+}
+
+listar_maquinas() {
+    clear
+    echo -e "${GREEN}==========================================${RESET}"
+    echo -e "${LIGHT_GREEN}       📋 Listado de Máquinas CTF       ${RESET}"
+    echo -e "${GREEN}==========================================${RESET}"
+    echo
+
+    # URL del archivo
+    url_maquinas="https://raw.githubusercontent.com/Rannden-SHA/CyberLand-Labs/refs/heads/main/maquinas.txt"
+
+    # Descargar y procesar el archivo directamente
+    curl -s "$url_maquinas" | while IFS="|" read -r _ name url_web url_descarga difficulty os; do
+        # Saltar líneas vacías
+        if [ -z "$name" ]; then
+            continue
+        fi
+
+        # Mostrar información
+        echo -e "${YELLOW}${name}${RESET}"  # Nombre en amarillo
+        echo -e "${YELLOW}Dificultad: ${difficulty}${RESET}"
+        echo -e "${BLUE}Sistema Operativo: ${os}${RESET}"
+        echo -e "${MAGENTA}📎 Enlace Web: ${url_web}${RESET}"
+        echo -e "${MAGENTA}📥 Enlace de Descarga: ${url_descarga}${RESET}"
+        echo -e "${GREEN}------------------------------------------${RESET}"
+    done
+
+    # Comprobar si hubo algún error al descargar el archivo
+    if [ ${PIPESTATUS[0]} -ne 0 ]; then
+        echo -e "${RED}❌ No se pudo conectar con la URL del archivo. Verifique su conexión a Internet.${RESET}"
+    fi
+
+    read -p "Presione Enter para regresar al menú principal..." dummy
 }
 
 #######################################################################
