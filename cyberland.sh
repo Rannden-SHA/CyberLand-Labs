@@ -360,7 +360,7 @@ actualizar_script_con_sha() {
     fi
 
     # Extraer la versión remota desde el archivo descargado
-    remote_version=$(grep -m1 '^# Version:' "$remote_file" | awk '{print $3}')
+    remote_version=$(grep -m1 '^# Version:' "$remote_file" | awk '{print $5}')
     if [ -z "$remote_version" ]; then
         remote_version="Desconocida"
     fi
