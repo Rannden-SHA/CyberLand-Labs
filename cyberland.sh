@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version: 1.10.1
-VERSION="1.10.1"
+VERSION="1.10.12"
 
 # Definición de colores
 BLACK="\e[30m"
@@ -477,8 +477,8 @@ listar_maquinas() {
         colores_dificultad=$(asignar_colores_dificultad "$difficulty")
         
         # Mostrar información
-        echo -e "${colores_dificultad} ${name} ${RESET}"  # Nombre con colores según dificultad
-        echo -e "${YELLOW}Dificultad:${RESET} ${difficulty}"
+        echo -e "${BG_GREEN}${LIGHT_RED}  ${name}${RESET}"
+        echo -e "${YELLOW}Dificultad:${RESET} ${colores_dificultad}${difficulty}${RESET}"
         echo -e "${LIGHT_MAGENTA}Sistema Operativo:${RESET} ${os}"
         echo -e "${CYAN}📎 Enlace Web:${RESET} ${url_web}"
         echo -e "${CYAN}📥 Enlace de Descarga:${RESET} ${url_descarga}"
