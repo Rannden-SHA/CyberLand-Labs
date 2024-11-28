@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Version: 2.9.8
-VERSION="2.9.8"
+# Version: 1.10.1
+VERSION="1.10.1"
 
 # Definición de colores
 BLACK="\e[30m"
@@ -408,7 +408,7 @@ actualizar_script_con_sha() {
     remote_sha=$(sha256sum "$remote_file" | awk '{print $1}')
 
     if [ "$local_sha" == "$remote_sha" ]; then
-        echo -e "${GREEN}✅ Su script ya está actualizado. (Versión: $current_version)${RESET}"
+        echo -e "${LIGHT_GREEN}✅ Su script ya está actualizado. (Versión: $current_version)${RESET}"
         rm -f "$remote_file"  # Eliminar archivo temporal
         read -p "Presione Enter para regresar al menú principal..." dummy
         return
