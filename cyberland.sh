@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version: 1.10.12
-VERSION="1.10.12"
+VERSION="1.10.13"
 
 # Definición de colores
 BLACK="\e[30m"
@@ -478,6 +478,7 @@ listar_maquinas() {
         
         # Mostrar información
         echo -e "${BG_GREEN}${LIGHT_RED}  ${name}${RESET}"
+        echo
         echo -e "${YELLOW}Dificultad:${RESET} ${colores_dificultad}${difficulty}${RESET}"
         echo -e "${LIGHT_MAGENTA}Sistema Operativo:${RESET} ${os}"
         echo -e "${CYAN}📎 Enlace Web:${RESET} ${url_web}"
