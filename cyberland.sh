@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Version: 2.9.3
-VERSION="2.9.3"
+# Version: 2.9.4
+VERSION="2.9.4"
 
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
@@ -341,7 +341,7 @@ actualizar_script_con_sha() {
     current_file="${BASH_SOURCE[0]}"
 
     # Extraer la versión actual desde el archivo actual
-    current_version=$(grep -m1 '^# Version:' "$current_file" | awk '{print $5}')
+    current_version=$(grep -m1 '^# Version:' "$current_file" | awk '{print $3}')
     if [ -z "$current_version" ]; then
         current_version="Desconocida"
     fi
@@ -360,7 +360,7 @@ actualizar_script_con_sha() {
     fi
 
     # Extraer la versión remota desde el archivo descargado
-    remote_version=$(grep -m1 '^# Version:' "$remote_file" | awk '{print $5}')
+    remote_version=$(grep -m1 '^# Version:' "$remote_file" | awk '{print $3}')
     if [ -z "$remote_version" ]; then
         remote_version="Desconocida"
     fi
