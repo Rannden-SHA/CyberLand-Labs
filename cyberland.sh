@@ -477,7 +477,7 @@ listar_maquinas() {
         colores_dificultad=$(asignar_colores_dificultad "$difficulty")
         
         # Mostrar información
-        echo -e "  ${CYAN}${BLACK}  ${name}  ${RESET}"
+        echo -e "  ${BG_BLUE}${WHITE}  ${name}  ${RESET}"
         echo
         echo -e "${YELLOW}Dificultad:${RESET} ${colores_dificultad}  ${difficulty}  ${RESET}"
         echo -e "${LIGHT_MAGENTA}Sistema Operativo:${RESET} ${os}"
