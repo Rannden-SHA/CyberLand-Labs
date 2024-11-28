@@ -1042,7 +1042,7 @@ salir_script() {
     mensaje_aleatorio=${mensajes[$RANDOM % ${#mensajes[@]}]}
 
     # Preguntar si se desea realizar la limpieza
-    read -p "¿Desea realizar una 🗑️ limpieza completa de Docker antes de salir? (s/n): " limpiar
+    read -p "¿Desea realizar una 🗑️  limpieza completa de Docker antes de salir? (s/n): " limpiar
     if [[ "$limpiar" =~ ^[sS]$ ]]; then
         limpiar_docker
     fi
