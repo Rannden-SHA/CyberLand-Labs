@@ -161,7 +161,7 @@ Las contribuciones son bienvenidas. Por favor, realiza un **fork** del repositor
 - **CEO de CyberLand Labs**: [Adrián Gisbert](https://www.linkedin.com/in/sr-gisbert/)
 - **Creador de Máquinas CTF**: [Santiago Guevara](https://www.linkedin.com/in/santiagoguevara-/)
 
-🌐 **Más Información**: [CyberLand Labs](https://cyberlandsec.com)
+🌐 **Más Información**: [CyberLand Labs](https://cyberlandsec.com/cyberland-labs)
 
 ---
 
