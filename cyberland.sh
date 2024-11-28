@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Version: 2.9.1
-VERSION="2.9"
+VERSION="2.9.1"
 
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
