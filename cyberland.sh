@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Version: 2.9.6
-VERSION="2.9.6"
+# Version: 2.9.7
+VERSION="2.9.7"
 
 GREEN="\e[92m"
 LIGHT_GREEN="\e[1;32m"
@@ -429,12 +429,13 @@ listar_maquinas() {
         fi
 
         # Mostrar información
-        echo -e "${YELLOW}${name}${RESET}"  # Nombre en amarillo
-        echo -e "${YELLOW}Dificultad: ${difficulty}${RESET}"
-        echo -e "${BLUE}Sistema Operativo: ${os}${RESET}"
-        echo -e "${MAGENTA}📎 Enlace Web: ${url_web}${RESET}"
-        echo -e "${MAGENTA}📥 Enlace de Descarga: ${url_descarga}${RESET}"
-        echo -e "${GREEN}------------------------------------------${RESET}"
+        echo -e "${LIGHT_RED}${name}${RESET}"  # Nombre en amarillo
+        echo
+        echo -e "${YELLOW}Dificultad:${RESET} ${difficulty}"
+        echo -e "${BLUE}Sistema Operativo:${RESET} ${os}"
+        echo -e "${CYAN}📎 Enlace Web:${RESET} ${url_web}"
+        echo -e "${CYAN}📥 Enlace de Descarga:${RESET} ${url_descarga}"
+        echo -e "${GREEN}---------------------------------------------------------------${RESET}"
     done
 
     # Comprobar si hubo algún error al descargar el archivo
