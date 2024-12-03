@@ -1,2 +1,3 @@
 6|OpenStudio|https://cyberlandsec.com/cyberland-labs/?machine_id=6|https://mega.nz/file/JhJlhDhR#VPOqRamjC_9AnhGTb2OydGJ-vOUiVRSdZZyiUpK1_rE|Fácil|Linux
 7|Lattice|https://cyberlandsec.com/cyberland-labs/?machine_id=7|https://mega.nz/file/t5pWHBQZ#7DDplEHuvd-MMx-_Jp5TcOWvEkMhAC3ojjuwSlHWajM|Media|Linux
+8|Frib1t|https://cyberlandsec.com/cyberland-labs/?machine_id=8|https://mega.nz/file/AkZQjSJA#DLvGwDTeGSLgrV2YI2LR5WLGe3D2lyiOIn0lV2BxDy0|Fácil|Linux
