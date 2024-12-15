@@ -2,3 +2,4 @@
 7|Lattice|https://cyberlandsec.com/cyberland-labs/?machine_id=7|https://mega.nz/file/w9hXFbDT#gwLAHYNWVxKrUOnjnm1D_HU-eOPKo7B2Q-mRtf6v5iU|Media|Linux
 8|Frib1t|https://cyberlandsec.com/cyberland-labs/?machine_id=8|https://mega.nz/file/AkZQjSJA#DLvGwDTeGSLgrV2YI2LR5WLGe3D2lyiOIn0lV2BxDy0|Fácil|Linux
 9|Forgotten Portal|https://dockerlabs.es|https://mega.nz/file/WdUHiRoR#rLenZ3_90tt9g41RwHwDZIi6zJ0wU0HK49hKlDGhvAc|Media|Linux
+10|Stack Smashers|https://cyberlandsec.com/cyberland-labs/?machine_id=10|https://mega.nz/file/RkZBXCRR#s_hWb4qJ_u8iCO0LNWRZqk6yvmaL1EoAe1T3yW4esos|Experto|Linux
